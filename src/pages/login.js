@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text ,SafeAreaView, StyleSheet } from 'react-native';
-import style_global from '../global/style'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { black } from 'ansi-colors';
 
 import {connect} from 'react-redux'
+import {authUser} from '../actions/authActions' 
 
-import { authUser} from '../actions/authActions' 
+import style_global from '../global/style'
+
 
 
 class Login extends Component {
@@ -17,8 +17,11 @@ class Login extends Component {
     };
   }
   googleLogin = () => {
+      console.log('GOOGLE LOGIN')
      this.props.authUser()
   }
+
+
 
   render() {
     return (

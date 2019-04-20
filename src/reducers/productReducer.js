@@ -24,7 +24,7 @@ const INITIAL_STATE = {
 }
 
 export default (state = INITIAL_STATE, action) => {
-    console.log('Olooking action through reducer...', action)
+    console.log('PRODUCT - REDUCER -- looking action through reducer...', action)
     switch (action.type) {
         case CHANGE_COLOR:
             return {

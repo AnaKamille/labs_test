@@ -7,6 +7,7 @@ target 'totvs_labs' do
 
   # Pods for totvs_labs
   pod 'GoogleSignIn', '~> 4.4.0'
+  
 
   
 
