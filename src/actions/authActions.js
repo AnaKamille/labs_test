@@ -7,9 +7,7 @@ import { AUTH_USER, AUTH_USER_SUCCESS,
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 
 
-
-
-export const authUser = (user) => {
+export const authUser = () => {
     return dispatch => {
         
         dispatch({type: ACTIVITY})
@@ -30,7 +28,7 @@ const authUserSuccess = (dispatch, user) => {
     dispatch({
         type: AUTH_USER_SUCCESS
     })
-    Actions.principal();
+    Actions.listProducts();
 }
 const authUserError = (dispatch, error) => {
     dispatch({

@@ -2,6 +2,7 @@ import {
     AUTH_USER, AUTH_USER_SUCCESS,
     AUTH_USER_ERROR, ACTIVITY
 } from '../actions/types'
+import { Actions } from 'react-native-router-flux';
 
 
 const INITIAL_STATE = {
@@ -24,7 +25,7 @@ export default (state = INITIAL_STATE, action) => {
         case AUTH_USER_SUCCESS:
             return {
                 ...state,
-                user : {} , 
+                user : Actions.payload, 
                 authLoader: false,
             }
             break;

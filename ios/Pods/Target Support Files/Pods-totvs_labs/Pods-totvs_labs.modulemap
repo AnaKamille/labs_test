@@ -1,0 +1,6 @@
+framework module Pods_totvs_labs {
+  umbrella header "Pods-totvs_labs-umbrella.h"
+
+  export *
+  module * { export * }
+}
