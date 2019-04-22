@@ -12,9 +12,9 @@ export default props =>(
     <Router>
         
         <Scene key="root"  >
-            <Scene key="splash"  initial component={Splash} hideNavBar/>
+            <Scene key="splash"   component={Splash} hideNavBar/>
             <Scene key="editProduct" component={EditProduct}    title="Edit Product"  />
-            <Scene key="createProduct" component={CreateProduct}  title="Product"  />
+            <Scene key="createProduct"  initial component={CreateProduct}  title=" "  />
             <Scene key="listProduct" component={ListProduct} title="List Product" hideNavBar /> 
             <Scene key="login"       component={Login}   hideNavBar />
         </Scene>
