@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text ,SafeAreaView, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements'
+import { View, Text ,SafeAreaView, StyleSheet ,AsyncStorage} from 'react-native';
+import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-
-import {connect} from 'react-redux'
-import {authUser} from '../actions/authActions' 
+import { Actions } from 'react-native-router-flux'; 
+import { connect } from 'react-redux';
+import { authUser } from '../actions/authActions' ;
 
 import style_global from '../global/style'
-
-
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    
   }
+
+  componentDidMount(){ 
+    this.isLogged().then((user)=>{
+      if(user != null){
+        this.setState({user:user})
+        Actions.listProduct()
+      }
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  isLogged = async () => {
+    const user = await AsyncStorage.getItem('@user')
+    console.log('GET USER : ' , user)
+    return user
+    
+  }
+
   googleLogin = () => {
       console.log('GOOGLE LOGIN')
      this.props.authUser()
@@ -44,6 +60,7 @@ class Login extends Component {
             
                     
                 <View  style={{flex:2 , justifyContent:'flex-end'}}>
+                <Text style={style_global.error}>{this.props.authError}</Text>
                         <Button
                             icon={
                                     <Icon
@@ -81,7 +98,8 @@ const style = StyleSheet.create({
 const mapStateToProps = state => ({
     authLoader: state.AuthReducer.authLoader,
     authError : state.AuthReducer.authError,
+    user: state.AuthReducer.user
   });
   
-  export default connect(mapStateToProps,{ authUser } )(Login);
+  export default connect(mapStateToProps,{ authUser  } )(Login);
   

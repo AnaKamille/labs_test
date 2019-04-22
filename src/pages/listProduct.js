@@ -7,8 +7,6 @@ import {authUserSignout} from '../actions/authActions'
 import style_global from '../global/style'
 
 
-
-
 class ListProduct extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +29,7 @@ class ListProduct extends Component {
        </View>
               
       <View style={{flex:1 , justifyContent:"flex-end" , alignItems:"center"}}>
-        <TouchableOpacity onPress={()=> this.googleSignout()}>
+        <TouchableOpacity onPress={ ()=> { this.googleSignout() }} >
           <Text>Sign out</Text>
         </TouchableOpacity>
       </View>

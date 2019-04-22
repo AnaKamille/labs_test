@@ -6,6 +6,13 @@ export default styles_global = StyleSheet.create({
         
          
     },
+    error : {
+        fontSize:10,
+        color:'red',
+        alignSelf: 'center',
+        padding:10
+
+    }
    
 })
 

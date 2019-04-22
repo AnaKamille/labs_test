@@ -28,6 +28,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 user : Actions.payload, 
                 authLoader: false,
+                authError : ""
             }
             break;
 
@@ -36,6 +37,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 user : {} , 
                 authLoader: false,
+                authError : ""
             }
             break;
         case AUTH_USER_SIGNOUT_ERROR:

@@ -17,6 +17,10 @@ export default class App extends Component {
     };
   }
 
+  componentWillMount(){
+   console.disableYellowBox = true
+ }
+
   render() {
     return (
       <Provider store={createStore(reducers,{},applyMiddleware(ReduxThunk))}>
