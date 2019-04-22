@@ -9,21 +9,79 @@ import { changeColor , changePrice , changeName ,
 
 import style_global from '../global/style'
 
+import ImagePicker from 'react-native-image-picker';
+
+// More info on all the options is below in the API Reference... just some common use cases shown here
+const options = {
+  title: 'Product Picture',
+  storageOptions: {
+    skipBackup: true,
+    path: 'images',
+  },
+};
+
+/**
+ * The first arg is the options object for customization (it can also be null or omitted for default options),
+ * The second arg is the callback which sends object: response (more info in the API Reference)
+ */
+
 
 
 class CreateProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      avatarSource: {uri:'https://imbindonesia.com/images/placeholder/camera.jpg'}
     };
   }
+  insertProduct = () => {
+   
+    const product = {
+      size  : this.props.size,
+      color : this.props.color,
+      name  : this.props.name,
+      price : this.props.price,
+      image : this.props.image,
+    }
+    this.props.changeProduct(product)
+    console.log('lista' , this.props || this.props.productList );
+  }
+
+  takeAPicture = () => {
+    ImagePicker.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+  
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: response.uri };
+  
+        // You can also display the image using data:
+        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+  
+        this.setState({
+          avatarSource: source,
+        });
+      }
+    })
+  }
+
+  deleteProduct = () => {
+    alert("delete product");
+  }
+
+
 
   render() {
     return (
         <View style={{flex:1 ,justifyContent:"center"}}>
             <View style={{flex:3 , paddingBottom:30}}> 
                  <Image style={{flex:1 , paddingHorizontal:-50}}
-                    source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+                    source={this.state.avatarSource}
               />
               <Button
                   icon={
@@ -35,8 +93,8 @@ class CreateProduct extends Component {
                           />
                   }
                   title="EDIT PICTURE"
-                  onPress={() => this.googleLogin()}
-                  buttonStyle={{borderColor:"white", borderWidth:5, borderRadius:30 , color:"transparent" ,paddingHorizontal:15, marginHorizontal:50 , position:"absolute" , top:-60 , left:140 , fontSize:10}}
+                  onPress={() => this.takeAPicture()}
+                  buttonStyle={style.transparentButton}
                   titleStyle={{fontSize:13}}
                 />
 
@@ -44,7 +102,7 @@ class CreateProduct extends Component {
             <View style={{padding:10 , flex:5}}>
          
               <View style={{flex:1}}>
-                 <Text style={style.label}>Name</Text>
+                 <Text style={style.label}>Product name</Text>
                  <TextInput  style={style.input} value={this.props.name}  onChangeText={texto => {this.props.changeName(texto)}}  placeholder='Name'/>
               </View>
               <View style={{flex:1}}>
@@ -64,13 +122,13 @@ class CreateProduct extends Component {
               <View style={{flex:1 , justifyContent:"flex-end",padding:20}}>
                 <Button
                     title="Save"
-                    onPress={() => this.googleLogin()}
+                    onPress={() => this.insertProduct()}
                     buttonStyle={style.button}
-                    textStyle={{fontSize:5}}
+                    titleStyle={{fontSize:15}}
                     
                               
                           />
-                <TouchableOpacity style={{alignItems:"center" , padding:10}}>
+                <TouchableOpacity style={{alignItems:"center" , padding:10}} onPress={() => { this.deleteProduct()}}>
                    <Text>Delete</Text>
                 </TouchableOpacity>
               </View>
@@ -83,16 +141,24 @@ class CreateProduct extends Component {
 
 const style = StyleSheet.create({
   button : { 
-      
-             alignItems:"center",
+         alignItems:"center",
              backgroundColor:"black",
              borderRadius: 9,
              padding:10,
              marginHorizontal:60,
-             
-
-             
            },
+  transparentButton:{
+            backgroundColor: 'rgba(52, 52, 52, 0.8)',
+            borderColor:"white", 
+            borderWidth:3,
+            borderRadius:30 , 
+            paddingHorizontal:15, 
+            marginHorizontal:50 , 
+            position:"absolute" , 
+            top:-60 , 
+            left:140 , 
+            
+          },
   input: {
     fontSize:15 ,
     backgroundColor:"white" ,
@@ -119,7 +185,8 @@ const mapStateToProps = state => ({
   image: state.ProductReducer.image,
   size:state.ProductReducer.size,
   productError: state.ProductReducer.productError,
-  productLoader: state.ProductReducer.productLoader
+  productLoader: state.ProductReducer.productLoader,
+  pruductList: state.ProductReducer.productList
 
 });
 

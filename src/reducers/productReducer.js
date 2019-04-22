@@ -7,7 +7,9 @@ import {
     CHANGE_PRODUCT_SUCCESS,
     CHANGE_PRODUCT_ERROR,
     CHANGE_PRODUCT,
-    ACTIVITY
+    ACTIVITY_PRODUCT,
+    INSERT_PRODUCT,
+    DELETE_PRODUCT
     
 } from '../actions/types'
 
@@ -18,6 +20,7 @@ const INITIAL_STATE = {
     name: "",
     image: "",
     size:"",
+    productList : [],
     productError: "",
     productLoader: false
 
@@ -81,7 +84,28 @@ export default (state = INITIAL_STATE, action) => {
                 productLoader: false
             }
             break;
-        case ACTIVITY:
+        case INSERT_PRODUCT:
+            return {
+                ...state,
+                productList: [...state.productList, action.payload],
+                productError: "",
+                productLoader: false
+
+               
+            }
+            break;
+
+        case DELETE_PRODUCT:
+            return {
+                ...state.slice(0, action.payload),
+                ...state.slice(action.payload + 1),
+                productError: "",
+                productLoader: false
+
+               
+            }
+            break;
+        case ACTIVITY_PRODUCT:
             return {
                 ...state,
                 productLoader: true

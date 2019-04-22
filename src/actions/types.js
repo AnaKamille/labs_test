@@ -16,5 +16,8 @@ export const AUTH_USER         = 'auth_user'
 export const ACTIVITY_AUTH= 'activity_auth'
 export const ACTIVITY_PRODUCT= 'activity_product'
 
+export const INSERT_PRODUCT = 'insert_product'
+export const DELETE_PRODUCT = 'delete_product'
+
 
 

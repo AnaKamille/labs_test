@@ -7,9 +7,12 @@ import {
     CHANGE_NAME,
     CHANGE_SIZE , 
     CHANGE_IMAGE , 
-    CHANGE_PRODUCT_SUCESS,
+    CHANGE_PRODUCT,
+    CHANGE_PRODUCT_SUCCESS,
     CHANGE_PRODUCT_ERROR,
-    ACTIVITY
+    ACTIVITY_PRODUCT,
+    INSERT_PRODUCT,
+    DELETE_PRODUCT
 } from './types';
 
 export const changeColor = (data) => {
@@ -46,7 +49,9 @@ export const changeSize = (data) => {
 
 export const changeProduct = (product) => {
     return dispatch => {
-        dispatch({type: ACTIVITY})
+        dispatch({type: ACTIVITY_PRODUCT})
+        console.log('Change product', product)
+        insertProduct(dispatch,product)
 
         // firebase.auth().createUserWithEmailAndPassword(cadastro.email, cadastro.senha)
         //     .then(user => {
@@ -64,13 +69,13 @@ export const changeProduct = (product) => {
     }
 }
 
-const changeProdutcSuccess = (dispatch,product) => {
+const changeProductSucess = (dispatch,product) => {
     //  dispatch ({type: 'cadastra_usuario',payload: {...cadastro}})
     dispatch({
-        type: CHANGE_PRODUCT_SUCESS,
+        type: CHANGE_PRODUCT_SUCCESS,
         payload: product
     })
-    Actions.boasVindas();
+    Actions.listProduct();
 }
 
 const changeProdutcError = (erro, dispatch) => {
@@ -78,4 +83,21 @@ const changeProdutcError = (erro, dispatch) => {
         type: CHANGE_PRODUCT_ERROR,
         payload: erro.message
     })
+}
+
+const insertProduct = (dispatch,product) => {
+    console.log('INSERT_PRODUCT -> ',product)
+    dispatch({
+        type: INSERT_PRODUCT,
+        payload: product
+    })
+}
+
+export const deleteProduct = (product) => {
+        return dispatch => {
+        dispatch({
+            type: DELETE_PRODUCT,
+            payload: product.index
+        })
+    }
 }
