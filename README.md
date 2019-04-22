@@ -20,8 +20,11 @@ I'm in progress on this project
 - [ ] Upload APK 
 ## To run this project
  1 - Run command : yarn ,  in the root folder.
+ 
  2 -  Go to ios folder( cd ios ) and run pod install
+ 
  3 - Be happy on iOs ( Android test is needed).
+ 
 
  
 [Follow or contact me on Linkedin](https://www.linkedin.com/in/fredericobezerra/)
