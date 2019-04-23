@@ -23,6 +23,7 @@ const INITIAL_STATE = {
     size:"",
     productList : [
                    {size:'M', color:'black', name: 'Product Name', image: 'https://i0.wp.com/descubraoguaruja.com.br/wp-content/uploads/2016/07/default-placeholder.png',price: 25.99 },
+                   {size:'M', color:'black', name: 'Name', image: 'https://i0.wp.com/descubraoguaruja.com.br/wp-content/uploads/2016/07/default-placeholder.png',price: 25.99 },
                   ],
                 
     productError: "",

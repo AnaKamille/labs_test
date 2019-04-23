@@ -18,35 +18,35 @@ class ListProduct extends Component {
     };
   }
 
-  editProduct = (index) => {
-    console.log('edit product' , index)
+  editProduct = (product) => {
+    console.log('edit product' , product)
+    Actions.editProduct({product:product})
   }
   googleSignout = () => {
     console.log('Google signout');
    this.props.authUserSignout();
 }
 
-goToProduct = () => {
-  Actions.createProduct()
-}
+  addProduct = () => {
+    Actions.createProduct()
+  }
 
   render() {
     return (
     <SafeAreaView style={{flex:1}}>
-       <View style={{flex:6  , alignItems:"center"}}>
+       <View style={{flex:6  }}>
         <FlatList data={this.props.pruductList}
         keyExtractor={(item,index)=>{ item.id = index , item.id } }
             renderItem={({item}) => {
-              console.log('meu item --> ',item)
               return(
                
-                <View style={{flex:1 , flexDirection:'row', justifyContent:'space-between',padding:8 , borderBottomColor:'grey',borderBottomWidth:0.3}}>
+                <View style={{flexDirection:'row',padding:8 ,justifyContent: 'space-between', borderBottomColor:'grey',borderBottomWidth:0.3}}>
                   
-                  <View > 
+                  <View style={{flex:2}} > 
                     <Image source={{uri: item.image}} style={{width:100,height:150,borderRadius:15}}/>
                   </View>
                   
-                  <View style={{justifyContent:'space-around' , alignContent:"flex-start"}} >
+                  <View style={{justifyContent:'space-around' ,flex:2}} >
                       <View style={{flex:1}}>
                           <Text style={styles.itemBig}>{(item.name).substring(0,13)}</Text>
                       </View>
@@ -54,7 +54,7 @@ goToProduct = () => {
                         <Text style={styles.itemBigPrice}>RP {item.price}</Text>
                       </View>
                      
-                      <View style={{flex:1 , flexDirection:'row',justifyContent:'space-around'}}>
+                      <View style={{flex:1 , flexDirection:'row',justifyContent:'space-between' }}>
                           <View>
                               <Text style={styles.itemTitle} >Color</Text>
                               <Text style={styles.item}>{item.color}</Text>
@@ -67,16 +67,15 @@ goToProduct = () => {
                       
                   </View>
 
-                  <View>
+                  <View  style={{alignItems:"flex-end",flex:2}}>
                       <Button
                           title="EDIT"
-                          onPress={() => this.editProduct(item.id)}
-                          buttonStyle={styles.transparentButton}
+                          onPress={() => this.editProduct(item)}
+                          buttonStyle={{alignSelf:"flex-end",...styles.transparentButton}}
                           titleStyle={{fontSize:16 , color:'grey'}}
                     />
                   </View>
-                  <View sytle={{flex:1 , borderWidth:10 , borderColor:'red',backgroundColor:'red'}}>
-                  </View>
+                  
               </View>
               )
           }}
@@ -86,7 +85,7 @@ goToProduct = () => {
     <View style={{flex:1}}>
           <Button
                 title=" Add new product"
-                onPress={() => this.goToProduct()}
+                onPress={() => this.addProduct()}
                 buttonStyle={styles.button}
                 
             />
@@ -114,25 +113,20 @@ const styles = StyleSheet.create({
    paddingTop: 22
   },
   item: {
-    padding: 5,
+   
     fontSize: 15,
    
   },
   itemBig: {
-    paddingLeft: 20,
-    fontSize: 18,
-    padding:10
-   
+    fontSize: 16,
   },
   itemBigPrice: {
-    paddingLeft: 20,
-    fontSize: 18,
-    padding:10,
+    
+    fontSize: 16,
     color: 'green'
    
   },
   itemTitle: {
-    padding: 5,
     paddingBottom:-50,
     fontSize: 12,
     color:'grey'

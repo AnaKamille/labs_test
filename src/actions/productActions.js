@@ -103,11 +103,11 @@ export const deleteProduct = (index) => {
     }
 }
 
-export const renderProduct = (product) => {
+export const renderProduct = (index) => {
     return dispatch => {
         dispatch({
             type: RENDER_PRODUCT,
-            payload: product
+            payload: index
         })
     }   
 }

@@ -17,7 +17,7 @@ class FormProduct extends Component {
 
     console.log('FORM-PRODUCT ->' , this.props )
     this.isCreate = this.props.create 
-    this.productId = this.props.productId ? false : this.props.productId
+    this.product = this.props.product 
     this.pictureButton = this.isCreate ? 'ADD PICTURE' : 'EDIT PICTURE'
 
     this.state = {
@@ -27,13 +27,24 @@ class FormProduct extends Component {
 
   componentWillMount = () => {
 
-    if(this.productId){
-      this.props.loadProduct(this.productId)
+    console.log('product, inside form' ,this.props.product )
+    if(this.props.product ){
+      this.props.renderProduct(this.props.product )
     }
 
   }
 
+  
   takeAPicture = () => {
+
+    const options = {
+      title: 'Product Picture',
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    
     ImagePicker.launchCamera(options, (response) => {
       console.log('Response = ', response);
   
@@ -98,22 +109,22 @@ class FormProduct extends Component {
             <View style={{padding:10 , flex:5}}>
          
               <View style={{flex:1}}>
-                 <Text style={style.label}>Product name</Text>
-                 <TextInput  style={style.input} value={this.props.name}  onChangeText={texto => {this.props.changeName(texto)}}  placeholder='Name'/>
+                      <Text style={style.label}>Product name</Text>
+                      <TextInput  style={style.input} value={this.props.name}  onChangeText={texto => {this.props.changeName(texto)}}  placeholder='Name'/>
               </View>
               <View style={{flex:1}}>
-              <Text style={style.label}>Price</Text>
-                  <TextInput  style={style.input} value={this.props.price} onChangeText={texto => {this.props.changePrice(texto)}} placeholder='$00.00'/>
+                      <Text style={style.label}>Price</Text>
+                      <TextInput  style={style.input} value={this.props.price} onChangeText={texto => {this.props.changePrice(texto)}} placeholder='$00.00'/>
               </View>
-              <View style={{flex:1 , flexDirection:"row" , justifyContent: 'space-between' }}>
-                <View style={{flex:1}}>
-                    <Text style={style.label}>Color</Text>
-                    <TextInput  style={style.input} value={this.props.color} onChangeText={texto => {this.props.changeColor(texto)}} placeholder='Black'/>     
-                </View>
-                <View style={{flex:1}}>
-                    <Text style={style.label}>Size</Text>
-                    <TextInput  style={style.input}  value={this.props.size} onChangeText={texto => {this.props.changeSize(texto)}}  placeholder='M'/>     
-                </View>
+              <View style={{flex:1 , flexDirection:"row" , justifyContent: 'space-between', alignItems:"center" }}>
+                    <View style={{flex:1}}>
+                        <Text style={style.label}>Color</Text>
+                        <TextInput  style={style.input} value={this.props.color} onChangeText={texto => {this.props.changeColor(texto)}} placeholder='Black'/>     
+                    </View>
+                    <View style={{flex:1}}>
+                        <Text style={style.label}>Size</Text>
+                        <TextInput  style={style.input}  value={this.props.size} onChangeText={texto => {this.props.changeSize(texto)}}  placeholder='M'/>     
+                    </View>
               </View>
               <View style={{flex:1 , justifyContent:"flex-end",padding:20}}>
                 <Button
