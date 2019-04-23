@@ -9,7 +9,8 @@ import {
     CHANGE_PRODUCT,
     ACTIVITY_PRODUCT,
     INSERT_PRODUCT,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    RENDER_PRODUCT
     
 } from '../actions/types'
 
@@ -20,7 +21,10 @@ const INITIAL_STATE = {
     name: "",
     image: "",
     size:"",
-    productList : [],
+    productList : [
+                   {size:'M', color:'black', name: 'Product Name', image: 'https://i0.wp.com/descubraoguaruja.com.br/wp-content/uploads/2016/07/default-placeholder.png',price: 25.99 },
+                  ],
+                
     productError: "",
     productLoader: false
 
@@ -109,6 +113,18 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 productLoader: true
+            }
+            break;
+            case RENDER_PRODUCT:
+            return {
+                ...state,
+                color: action.payload.color,
+                price: action.payload.price,
+                image: action.payload.image,
+                name: action.payload.name,
+                size: action.payload.size,
+                productError: "",
+                productLoader: false
             }
             break;
 

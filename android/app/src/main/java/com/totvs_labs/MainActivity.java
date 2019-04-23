@@ -1,4 +1,4 @@
-package com.totvs_labs;
+package com.fredd.totvslabs;
 
 import com.facebook.react.ReactActivity;
 

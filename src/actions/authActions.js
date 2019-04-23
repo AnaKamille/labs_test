@@ -22,7 +22,7 @@ export const authUser = () => {
                 authUserSuccess(dispatch, user)
             } catch(error){
                 errorHuman = googleAuthErrorBeautyfy(error)
-                console.log('Humna-->', errorHuman)
+                console.log('Humna-->', error)
                 authUserError(dispatch, errorHuman)
             };
         }

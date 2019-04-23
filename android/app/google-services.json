@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "508657063750",
+    "firebase_url": "https://totvslabs-28ef2.firebaseio.com",
+    "project_id": "totvslabs-28ef2",
+    "storage_bucket": "totvslabs-28ef2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508657063750:android:9dcbe081989ec6ae",
+        "android_client_info": {
+          "package_name": "com.fredd.totvslabs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508657063750-c8ge1f5v6q0n3a30jcdv230uacgg1b8c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWlYU19iXPVqe0rgikWPhVNs0fSx1r91I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508657063750-c8ge1f5v6q0n3a30jcdv230uacgg1b8c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "508657063750-s4mlfnjhj4cdcmo9530kevbj7vvs1gnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fredd.totvslabs"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

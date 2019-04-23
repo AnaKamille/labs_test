@@ -18,6 +18,7 @@ export const ACTIVITY_PRODUCT= 'activity_product'
 
 export const INSERT_PRODUCT = 'insert_product'
 export const DELETE_PRODUCT = 'delete_product'
+export const RENDER_PRODUCT = 'render_product'
 
 
 

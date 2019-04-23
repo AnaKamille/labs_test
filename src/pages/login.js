@@ -59,7 +59,7 @@ class Login extends Component {
                 
             
                     
-                <View  style={{flex:2 , justifyContent:'flex-end'}}>
+                <View  style={{flex:2 , justifyContent:'center'}}>
                 <Text style={style_global.error}>{this.props.authError}</Text>
                         <Button
                             icon={

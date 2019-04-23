@@ -12,7 +12,8 @@ import {
     CHANGE_PRODUCT_ERROR,
     ACTIVITY_PRODUCT,
     INSERT_PRODUCT,
-    DELETE_PRODUCT
+    DELETE_PRODUCT,
+    RENDER_PRODUCT
 } from './types';
 
 export const changeColor = (data) => {
@@ -93,11 +94,20 @@ const insertProduct = (dispatch,product) => {
     })
 }
 
-export const deleteProduct = (product) => {
+export const deleteProduct = (index) => {
         return dispatch => {
         dispatch({
             type: DELETE_PRODUCT,
-            payload: product.index
+            payload: index
         })
     }
+}
+
+export const renderProduct = (product) => {
+    return dispatch => {
+        dispatch({
+            type: RENDER_PRODUCT,
+            payload: product
+        })
+    }   
 }

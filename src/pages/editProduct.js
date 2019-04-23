@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import style_global from '../global/style'
-
+import FormProduct from '../components/FormProduct'
 
 export default class EditProduct extends Component {
   constructor(props) {
@@ -12,9 +10,7 @@ export default class EditProduct extends Component {
 
   render() {
     return (
-        <View style={style_global.container}>
-        <Text> Edit Product </Text>
-      </View>
-    );
+      <FormProduct create={false} productId={this.props.productId}/>
+    )
   }
 }
