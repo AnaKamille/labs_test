@@ -19,7 +19,6 @@ class ListProduct extends Component {
   }
 
   editProduct = (product) => {
-    console.log('edit product' , product)
     Actions.editProduct({product:product})
   }
   googleSignout = () => {
@@ -36,7 +35,7 @@ class ListProduct extends Component {
     <SafeAreaView style={{flex:1}}>
        <View style={{flex:6  }}>
         <FlatList data={this.props.pruductList}
-        keyExtractor={(item,index)=>{ item.id = index , item.id } }
+        keyExtractor={item => item.id  }
             renderItem={({item}) => {
               return(
                
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   authLoader: state.AuthReducer.authLoader,
   authError : state.AuthReducer.authError,
-  pruductList: state.ProductReducer.productList
+  pruductList: state.ProductReducer
 
 });
 

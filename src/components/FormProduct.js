@@ -1,42 +1,42 @@
 import React, { Component } from 'react';
-import { View, Text ,TextInput,SafeAreaView, StyleSheet ,TouchableOpacity , Image} from 'react-native';
+import { View, Text ,TextInput,ScrollView, StyleSheet ,TouchableOpacity , Image,Alert} from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 
 
-import { changeColor , changePrice , changeName , 
-  changeImage , changeSize  , changeProduct,
-  deleteProduct,renderProduct  } from '../actions/productActions' ;
+import { addProduct,editProduct,removeProduct,renderProduct  } from '../actions/productActions' ;
+import { Actions } from 'react-native-router-flux';
 
 
 class FormProduct extends Component {
   constructor(props) {
     super(props);
-
-    console.log('FORM-PRODUCT ->' , this.props )
     this.isCreate = this.props.create 
-    this.product = this.props.product 
     this.pictureButton = this.isCreate ? 'ADD PICTURE' : 'EDIT PICTURE'
 
     this.state = {
-      avatarSource: {uri:'https://imbindonesia.com/images/placeholder/camera.jpg'}
+      image:  this.props.product && this.props.product.image || 'https://imbindonesia.com/images/placeholder/camera.jpg',
+      color:  this.props.product &&this.props.product.color || "" ,
+      size:  this.props.product && this.props.product.size    || "" , 
+      price:  this.props.product &&this.props.product.price  || "" , 
+      name:   this.props.product &&this.props.product.name    || "" ,
+      loader: false,
+      
     };
   }
 
   componentWillMount = () => {
 
-    console.log('product, inside form' ,this.props.product )
-    if(this.props.product ){
-      this.props.renderProduct(this.props.product )
-    }
+    console.log('product, inside form')
+    // if(this.props.product ){
+     //  this.props.renderProduct(this.props.product )
+    // }
 
   }
 
-  
   takeAPicture = () => {
-
     const options = {
       title: 'Product Picture',
       storageOptions: {
@@ -45,7 +45,7 @@ class FormProduct extends Component {
       },
     };
     
-    ImagePicker.launchCamera(options, (response) => {
+    ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
   
       if (response.didCancel) {
@@ -56,9 +56,8 @@ class FormProduct extends Component {
         console.log('User tapped custom button: ', response.customButton);
       } else {
         const source = { uri: response.uri };
-        this.props.changeImage(response.uri )
         this.setState({
-          avatarSource: source,
+          image: response.uri,
         });
       }
     })
@@ -66,29 +65,60 @@ class FormProduct extends Component {
 //Save the product in form
   save = () => {
     const product = {
-      size  : this.props.size,
-      color : this.props.color,
-      name  : this.props.name,
-      price : this.props.price,
-      image : this.props.image.trim() == "" ? 'https://imbindonesia.com/images/placeholder/camera.jpg' : this.props.image,
+      size  : this.state.size,
+      color : this.state.color,
+      name  : this.state.name,
+      price : this.state.price,
+      image : this.state.image == "" ? 'https://imbindonesia.com/images/placeholder/camera.jpg' : this.state.image,
     }
-    this.props.changeProduct(product)
-    console.log('lista' , this.props || this.props.productList );
+    this.props.addProduct(product)
+    Actions.listProduct()
   }
 
   // delete product in form
-  delete = () => {
+  remove = () => {
 
-    this.props.deleteProduct(this.props.product)
-    alert("delete product -> ");
+    console.log('creation ? -->',this.isCreate)
+      
+    if(this.isCreate){
+        this.setState({
+          image:  'https://imbindonesia.com/images/placeholder/camera.jpg',
+          color:  "" ,
+          size:    "" , 
+          price:  "" , 
+          name:    "" ,
+          loader: false,
+        })
+        Actions.listProduct()
+    }else{
+
+      Alert.alert(
+        'Remove Product',
+        'Are you sure ?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Remove', onPress: () => {
+            this.props.removeProduct(this.props.product.id)
+            Actions.listProduct()
+          }},
+        ],
+        {cancelable: false},
+      );
+     
+    }
+    
   }
 
   render() {
     return (
-        <View style={{flex:1 ,justifyContent:"center"}}>
+        <View style={{flex:1 }}>
             <View style={{flex:3 , paddingBottom:30}}> 
                  <Image style={{flex:1 , paddingHorizontal:-50}}
-                    source={this.state.avatarSource}
+                    source={{uri : this.state.image}}
               />
               <Button
                   icon={
@@ -106,26 +136,27 @@ class FormProduct extends Component {
                 />
 
             </View>
-            <View style={{padding:10 , flex:5}}>
-         
-              <View style={{flex:1}}>
-                      <Text style={style.label}>Product name</Text>
-                      <TextInput  style={style.input} value={this.props.name}  onChangeText={texto => {this.props.changeName(texto)}}  placeholder='Name'/>
-              </View>
-              <View style={{flex:1}}>
-                      <Text style={style.label}>Price</Text>
-                      <TextInput  style={style.input} value={this.props.price} onChangeText={texto => {this.props.changePrice(texto)}} placeholder='$00.00'/>
-              </View>
-              <View style={{flex:1 , flexDirection:"row" , justifyContent: 'space-between', alignItems:"center" }}>
-                    <View style={{flex:1}}>
-                        <Text style={style.label}>Color</Text>
-                        <TextInput  style={style.input} value={this.props.color} onChangeText={texto => {this.props.changeColor(texto)}} placeholder='Black'/>     
-                    </View>
-                    <View style={{flex:1}}>
-                        <Text style={style.label}>Size</Text>
-                        <TextInput  style={style.input}  value={this.props.size} onChangeText={texto => {this.props.changeSize(texto)}}  placeholder='M'/>     
-                    </View>
-              </View>
+            <View style={{ flex:5}}>
+            
+                  <View style={{flex:1}}>
+                          <Text style={style.label}>Product name</Text>
+                          <TextInput  style={style.input} value={this.state.name}  onChangeText={data =>  this.setState({name:data}) }  placeholder='Name'/>
+                  </View>
+                  <View style={{flex:1}}>
+                          <Text style={style.label}>Price</Text>
+                          <TextInput  style={style.input} value={this.state.price} onChangeText={data =>  this.setState({price:data}) } placeholder='$00.00'/>
+                  </View>
+                  <View style={{flex:1 , flexDirection:"row" , justifyContent: 'space-between', alignItems:"center" }}>
+                        <View style={{flex:1}}>
+                            <Text style={style.label}>Color</Text>
+                            <TextInput  style={style.input} value={this.state.color} onChangeText={data =>  this.setState({color:data}) } placeholder='Black'/>     
+                        </View>
+                        <View style={{flex:1}}>
+                            <Text style={style.label}>Size</Text>
+                            <TextInput  style={style.input}  value={this.state.size} onChangeText={data =>  this.setState({size:data}) }  placeholder='M'/>     
+                        </View>
+                  </View>
+            
               <View style={{flex:1 , justifyContent:"flex-end",padding:20}}>
                 <Button
                     title="Save"
@@ -133,10 +164,11 @@ class FormProduct extends Component {
                     buttonStyle={style.button}
                     titleStyle={{fontSize:15}}   
                 />
-                <TouchableOpacity style={{alignItems:"center" , padding:10}} onPress={() => { this.delete()}}>
+                <TouchableOpacity style={{alignItems:"center" , padding:10}} onPress={() => { this.remove()}}>
                    <Text>Delete</Text>
                 </TouchableOpacity>
               </View>
+             
             </View>
       </View>
     );
@@ -183,16 +215,7 @@ const style = StyleSheet.create({
 
 const mapStateToProps = state => ({
   
-  color: state.ProductReducer.color,
-  price: state.ProductReducer.price,
-  name: state.ProductReducer.name,
-  image: state.ProductReducer.image,
-  size:state.ProductReducer.size,
-  productError: state.ProductReducer.productError,
-  productLoader: state.ProductReducer.productLoader,
-  pruductList: state.ProductReducer.productList
 
 });
 
-export default connect(mapStateToProps,{ changeColor , changePrice , changeName , 
-                                         changeImage , changeSize  , changeProduct,deleteProduct,renderProduct  } )(FormProduct);
+export default connect(mapStateToProps,{ addProduct,editProduct,removeProduct,renderProduct   } )(FormProduct);
