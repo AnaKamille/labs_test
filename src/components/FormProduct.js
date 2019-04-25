@@ -9,7 +9,6 @@ import ImagePicker from 'react-native-image-picker';
 import { addProduct,editProduct,removeProduct,renderProduct  } from '../actions/productActions' ;
 import { Actions } from 'react-native-router-flux';
 
-
 class FormProduct extends Component {
   constructor(props) {
     super(props);
@@ -26,17 +25,8 @@ class FormProduct extends Component {
       
     };
   }
-
-  componentWillMount = () => {
-
-    console.log('product, inside form')
-    // if(this.props.product ){
-     //  this.props.renderProduct(this.props.product )
-    // }
-
-  }
-
   takeAPicture = () => {
+    console.log('aqui!');
     const options = {
       title: 'Product Picture',
       storageOptions: {
@@ -46,7 +36,7 @@ class FormProduct extends Component {
     };
     
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
+      console.log('camera', response)
   
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -74,12 +64,8 @@ class FormProduct extends Component {
     this.props.addProduct(product)
     Actions.listProduct()
   }
-
   // delete product in form
   remove = () => {
-
-    console.log('creation ? -->',this.isCreate)
-      
     if(this.isCreate){
         this.setState({
           image:  'https://imbindonesia.com/images/placeholder/camera.jpg',
@@ -112,7 +98,6 @@ class FormProduct extends Component {
     }
     
   }
-
   render() {
     return (
         <View style={{flex:1 }}>
@@ -174,7 +159,6 @@ class FormProduct extends Component {
     );
   }
 }
-
 const style = StyleSheet.create({
   button : { 
          alignItems:"center",
@@ -214,8 +198,6 @@ const style = StyleSheet.create({
 })
 
 const mapStateToProps = state => ({
-  
 
 });
-
 export default connect(mapStateToProps,{ addProduct,editProduct,removeProduct,renderProduct   } )(FormProduct);
