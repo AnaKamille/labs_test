@@ -31,7 +31,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+        <PersistGate loading={<View style={{justifyContent:"center", alignItems:"center"}}><Text>Loading...</Text></View>} persistor={persistor}>
             <Routes/>
         </PersistGate>
       </Provider>

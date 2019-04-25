@@ -13,10 +13,10 @@ I'm in progress on this project
  - [x] Camera implementation (iOS only)
 
 ## Next steps
-- [ ] Redux persist
-- [ ] Beautify List of products
-- [ ] Refactor component Form(to unique component)
-- [ ] Test on Android
+- [x] Redux persist
+- [x] Beautify List of products
+- [x] Refactor component Form(to unique component)
+- [x] Test on Android
 - [ ] Upload APK 
 ## To run this project
  1 - Run command : yarn ,  in the root folder.

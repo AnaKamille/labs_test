@@ -14,8 +14,8 @@ export default props =>(
         <Scene key="root"  >
             <Scene key="editProduct" component={EditProduct}    title="Edit Product"  />
             <Scene key="createProduct"    component={CreateProduct}  title=" "  />
-            <Scene key="listProduct" initial  component={ListProduct} title="List Product" hideNavBar /> 
-            <Scene key="login"        component={Login}   hideNavBar />
+            <Scene key="listProduct"   component={ListProduct} title="List Product" hideNavBar /> 
+            <Scene key="login" initial     component={Login}   hideNavBar />
         </Scene>
     </Router>
 )
