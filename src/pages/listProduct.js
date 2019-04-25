@@ -35,7 +35,7 @@ class ListProduct extends Component {
     <SafeAreaView style={{flex:1}}>
        <View style={{flex:6  }}>
         <FlatList data={this.props.pruductList}
-        keyExtractor={item => item.id  }
+       keyExtractor={(item) => `key-${item.id}`}
             renderItem={({item}) => {
               return(
                

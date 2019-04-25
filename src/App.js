@@ -4,11 +4,18 @@ import { View, Text } from 'react-native';
 import {Provider} from 'react-redux' 
 import {createStore,applyMiddleware} from 'redux';
 
+import { PersistGate } from 'redux-persist/lib/integration/react';
+
+// import the two exports from the last code snippet.
+import { persistor, store } from './store';
+
 //handle Async 
 import ReduxThunk from "redux-thunk"
 
 import Routes from "./Routes"
 import reducers from  "./reducers"
+
+
 
 export default class App extends Component {
   constructor(props) {
@@ -23,8 +30,10 @@ export default class App extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducers,{},applyMiddleware(ReduxThunk))}>
-          <Routes/>
+      <Provider store={store}>
+        <PersistGate loading={<Text>Loading...</Text>} persistor={persistor}>
+            <Routes/>
+        </PersistGate>
       </Provider>
     
     );

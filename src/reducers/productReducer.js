@@ -9,7 +9,7 @@ import {
 // Start the sequence of item ID's at 0
 let nextItemId = 0;
 
-const INITIAL_STATE = [{id:0 , name:"teste" , image:"", size: "GG", color: "balck" , price : "89.9"}];
+const INITIAL_STATE = [];
 
 export default (state = INITIAL_STATE, action) => {
     console.log('PRODUCT - REDUCER -- looking action through reducer...', action)
@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
                 name:  action.payload.name,
                 image: action.payload.image,
                 size:  action.payload.size,
-                id: nextItemId++,
+                id: state.length+1,
               }
             ];
           }
