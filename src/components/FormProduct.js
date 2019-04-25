@@ -79,8 +79,8 @@ class FormProduct extends Component {
   // delete product in form
   delete = () => {
 
-    this.props.deleteProduct(this.productId)
-    alert("delete product");
+    this.props.deleteProduct(this.props.product)
+    alert("delete product -> ");
   }
 
   render() {
