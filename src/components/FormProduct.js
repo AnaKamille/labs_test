@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text ,TextInput,ScrollView, StyleSheet ,TouchableOpacity , Image,Alert} from 'react-native';
+import { Platform,View, Text ,TextInput,ScrollView, StyleSheet ,TouchableOpacity , Image,Alert} from 'react-native';
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
+
+import AndroidKeyboardAdjust from 'react-native-android-keyboard-adjust';
+
+if(Platform.OS !== 'ios'){
+  AndroidKeyboardAdjust.setAdjustPan();
+}
 
 
 import { addProduct,editProduct,removeProduct,renderProduct  } from '../actions/productActions' ;

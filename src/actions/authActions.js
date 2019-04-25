@@ -22,7 +22,7 @@ export const authUser = () => {
                 authUserSuccess(dispatch, user)
             } catch(error){
                 errorHuman = googleAuthErrorBeautyfy(error)
-                console.log('Humna-->', error)
+                
                 authUserError(dispatch, errorHuman)
             };
         }
@@ -52,7 +52,6 @@ export const authUserSignout = () => {
               //await GoogleSignin.revokeAccess();
               await GoogleSignin.signOut();
               await this.removeData('@user')
-              console.log('USER - SIGNED OUT')
               authUserSignoutSucess(dispatch);
             } catch (error) {
                 console.error('authUserSignout',error);
@@ -84,7 +83,6 @@ storeData = async (key , value) => {
       await AsyncStorage.setItem(key, value)
     } catch (error) {
       // saving error
-      console.log('Error :: ' , error)
     }
   }
 
@@ -92,6 +90,5 @@ removeData = async (key) => {
       try{
           await AsyncStorage.removeItem(key)
       }catch(error){
-        console.log('Error ::' , error)
       }
   }

@@ -12,6 +12,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import net.zubricky.AndroidKeyboardAdjust.AndroidKeyboardAdjustPackage;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
         //    new AsyncStoragePackage(),
             new VectorIconsPackage(),
             new RNGoogleSigninPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
+            new AndroidKeyboardAdjustPackage()
       );
     }
 

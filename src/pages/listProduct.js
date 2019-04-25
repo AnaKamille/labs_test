@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text , TouchableOpacity ,SafeAreaView,FlatList , StyleSheet,Image} from 'react-native';
-import { Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 
 import {connect} from 'react-redux'
@@ -22,7 +22,6 @@ class ListProduct extends Component {
     Actions.editProduct({product:product})
   }
   googleSignout = () => {
-    console.log('Google signout');
    this.props.authUserSignout();
 }
 
@@ -34,8 +33,10 @@ class ListProduct extends Component {
     return (
     <SafeAreaView style={{flex:1}}>
        <View style={{flex:6  }}>
+
+{!this.props.productList && 
         <FlatList data={this.props.pruductList}
-       keyExtractor={(item) => `key-${item.id}`}
+         keyExtractor={(item) => `key-${item.id}`}
             renderItem={({item}) => {
               return(
                
@@ -79,13 +80,30 @@ class ListProduct extends Component {
               )
           }}
           />
+        }
+
+{ !this.props.productList  &&
+  <View style={{flex:3 , justifyContent:'flex-start'}}>
+  <TouchableOpacity onPress={()=>{alert('Hire Me')}}>
+      <Icon
+          name="list"
+          size={130}
+          color="black"
+          style={{padding:20,alignSelf:"center"}}
+      />
+      </TouchableOpacity>
+  <Text style={{alignSelf:"center"}}> Coding Challenge </Text>
+</View>
+} 
+
+
        </View>
 
-    <View style={{flex:1}}>
-          <Button
-                title=" Add new product"
-                onPress={() => this.addProduct()}
-                buttonStyle={styles.button}
+        <View style={{flex:1}}>
+              <Button
+                    title=" Add new product"
+                    onPress={() => this.addProduct()}
+                    buttonStyle={styles.button}
                 
             />
                   

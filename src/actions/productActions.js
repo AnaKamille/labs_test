@@ -9,7 +9,7 @@ import {
 
 export const addProduct = (product) => {
     return dispatch => {
-        console.log('Add product -> ' , product)
+        
         dispatch({
             type: ADD_PRODUCT,
             payload: product

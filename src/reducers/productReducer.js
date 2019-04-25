@@ -5,14 +5,8 @@ import {
     
 } from '../actions/types'
 
-
-// Start the sequence of item ID's at 0
-let nextItemId = 0;
-
 const INITIAL_STATE = [];
-
 export default (state = INITIAL_STATE, action) => {
-    console.log('PRODUCT - REDUCER -- looking action through reducer...', action)
     switch (action.type) {
       
         case ADD_PRODUCT: {

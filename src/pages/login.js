@@ -21,19 +21,19 @@ class Login extends Component {
         Actions.listProduct()
       }
     }).catch((error) => {
-      console.log(error);
+      
     })
   }
 
   isLogged = async () => {
     const user = await AsyncStorage.getItem('@user')
-    console.log('GET USER : ' , user)
+    
     return user
     
   }
 
   googleLogin = () => {
-      console.log('GOOGLE LOGIN')
+      
      this.props.authUser()
   }
 
